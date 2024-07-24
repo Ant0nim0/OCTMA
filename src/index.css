@@ -2,10 +2,39 @@
   --tg-theme-bg-color: #efeff3;
   --tg-theme-button-color: #63d0f9;
   --tg-theme-button-text-color: black;
+  --tg-theme-text-color: #333;
+  --tg-theme-hint-color: #666;
+  --tg-theme-card-bg-color: white;
+  --tg-theme-card-border-color: #ddd;
+  --tg-theme-card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tg-theme-bg-color: #131415;
+    --tg-theme-text-color: #fff;
+    --tg-theme-button-color: #32a6fb;
+    --tg-theme-button-text-color: #fff;
+    --tg-theme-hint-color: #bbb;
+    --tg-theme-card-bg-color: #1e1f21;
+    --tg-theme-card-border-color: #444;
+    --tg-theme-card-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
 }
 
 .App {
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
 }
@@ -19,6 +48,10 @@
   align-items: center;
   margin: 0 auto;
   text-align: center;
+  background-color: var(--tg-theme-card-bg-color);
+  border: 1px solid var(--tg-theme-card-border-color);
+  box-shadow: var(--tg-theme-card-shadow);
+  border-radius: 10px;
 }
 
 .Button {
@@ -30,44 +63,42 @@
   cursor: pointer;
   font-weight: bold;
   width: 100%;
+  transition: filter 0.2s ease, transform 0.2s ease;
+  border: none;
 }
 
-.Disabled {
+.Button:hover {
+  filter: brightness(110%);
+  transform: scale(1.02);
+}
+
+.Button:active {
+  filter: brightness(90%);
+  transform: scale(0.98);
+}
+
+.Button.Disabled {
   filter: brightness(50%);
-  cursor: initial;
-}
-
-.Button.Active:hover {
-  filter: brightness(105%);
+  cursor: not-allowed;
 }
 
 .Hint {
   color: var(--tg-theme-hint-color);
+  font-size: 0.875rem;
 }
 
 .Card {
   width: 100%;
   padding: 10px 20px;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--tg-theme-card-bg-color);
+  border: 1px solid var(--tg-theme-card-border-color);
+  box-shadow: var(--tg-theme-card-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --tg-theme-bg-color: #131415;
-    --tg-theme-text-color: #fff;
-    --tg-theme-button-color: #32a6fb;
-    --tg-theme-button-text-color: #fff;
-  }
-
-  .Card {
-    background-color: var(--tg-theme-bg-color);
-    filter: brightness(165%);
-  }
-
-  .CounterValue {
-    border-radius: 16px;
-    color: white;
-    padding: 10px;
-  }
+.CounterValue {
+  border-radius: 16px;
+  color: var(--tg-theme-text-color);
+  padding: 10px;
 }
